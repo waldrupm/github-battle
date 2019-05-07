@@ -9,12 +9,19 @@ const styles = {
 };
 
 class Loading extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      text: props.text
-    }
+  state = {
+    text: this.props.text
+  }
+
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    speed: PropTypes.number.isRequired
+  }
+
+  static defaultProps = {
+    text: 'Loading',
+    speed: 300
   }
 
   componentDidMount() {
@@ -37,16 +44,6 @@ class Loading extends React.Component {
   componentWillUnmount() {
     window.clearInterval(this.interval);
   }
-}
-
-Loading.propTypes = {
-  text: PropTypes.string.isRequired,
-  speed: PropTypes.number.isRequired
-}
-
-Loading.defaultProps = {
-  text: 'Loading',
-  speed: 300
 }
 
 export default Loading;
