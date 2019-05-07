@@ -50,12 +50,9 @@ class Results extends React.Component {
     error: null,
     loading: true
   }
-  componentDidMount () {
+  async componentDidMount () {
     const { playerOneName, playerTwoName } = queryString.parse(this.props.location.search);
-    battle([
-      playerOneName,
-      playerTwoName
-    ]).then((players) => {
+    const players = await battle([playerOneName, playerTwoName]);
       if (players === null) {
         return this.setState(() => ({
             error: 'Looks like there was an error. Check both users exist on Github.',
@@ -69,7 +66,6 @@ class Results extends React.Component {
         loser: players[1],
         loading: false
       }))
-    });
   }
 
   render() { 
